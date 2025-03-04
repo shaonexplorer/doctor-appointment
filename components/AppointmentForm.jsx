@@ -8,6 +8,7 @@ import CustomDateInput from "./CustomDateInput";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { createAppointment } from "@/lib/actions/createAppointment";
 import { useState } from "react";
+import Image from "next/image";
 
 function AppointmentForm() {
   const [loading, setLoading] = useState(false);
