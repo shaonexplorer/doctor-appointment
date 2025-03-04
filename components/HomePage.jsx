@@ -65,7 +65,7 @@ function HomePage() {
     <div className="w-[1440px] h-screen mx-auto bg-[#131619] flex">
       <div className="w-[720px] px-[110px] py-[60px] flex flex-col justify-between">
         <Image
-          src={"/home/logo.png"}
+          src={"/assets/icons/logo-full.svg"}
           width={160}
           height={32}
           alt="logo"
