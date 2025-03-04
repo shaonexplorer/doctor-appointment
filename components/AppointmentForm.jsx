@@ -7,8 +7,10 @@ import CustomTextArea from "./CustomTextArea";
 import CustomDateInput from "./CustomDateInput";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { createAppointment } from "@/lib/actions/createAppointment";
+import { useState } from "react";
 
 function AppointmentForm() {
+  const [loading, setLoading] = useState(false);
   const { control, formState, getValues, handleSubmit } = useForm();
   const searchParams = useSearchParams();
   const params = useParams();
@@ -16,19 +18,22 @@ function AppointmentForm() {
 
   async function onSubmit(e) {
     // e.preventDefault();
-    console.log(formState);
+    // console.log(formState);
     let data = getValues();
     const user = params.userId;
     const patient = searchParams.get("patientId");
     try {
+      setLoading(true);
       const response = await createAppointment(data, user, patient);
-      console.log(response);
+      // console.log(response);
+      setLoading(false);
       if (response)
         router.push(
           `/patients/${user}/new-appointment/success?appointmentId=${response._id}`
         );
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   }
   return (
@@ -98,7 +103,20 @@ function AppointmentForm() {
         type="submit"
         className="text-white mt-10 font-semibold text-[16px] h-[48px] bg-[#24AE7C] rounded-[8px] w-full py-[8px] mb-[90px]"
       >
-        submit and continue
+        {loading ? (
+          <div className=" bg-transparent flex items-center justify-center gap-3">
+            <p className="bg-transparent">Submitting</p>
+            <Image
+              src={"/home/spinner.svg"}
+              width={25}
+              height={25}
+              alt="spinner"
+              className=" bg-transparent animate-spin"
+            />
+          </div>
+        ) : (
+          "Submit and Continue"
+        )}
       </button>
     </Form>
   );

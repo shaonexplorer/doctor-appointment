@@ -12,8 +12,10 @@ import handle from "@/lib/actions/user";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 
 function HomePage() {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const schema = z.object({
     firstName: z
@@ -41,8 +43,10 @@ function HomePage() {
   async function onSubmit() {
     let data = getValues();
     try {
+      setLoading(true);
       const response = await handle(data);
-      console.log(response);
+      // console.log(response);
+      setLoading(false);
 
       if (response.error) {
         alert(response.error);
@@ -53,6 +57,7 @@ function HomePage() {
       }
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   }
 
@@ -60,7 +65,7 @@ function HomePage() {
     <div className="w-[1440px] h-screen mx-auto bg-[#131619] flex">
       <div className="w-[720px] px-[110px] py-[60px] flex flex-col justify-between">
         <Image
-          src="/home/logo.svg"
+          src={"/home/logo.svg"}
           width={160}
           height={32}
           alt="logo"
@@ -136,7 +141,24 @@ function HomePage() {
             />
 
             <div className="mt-[24px]">
-              <CustomButton label={"get started"} />
+              <CustomButton
+                label={
+                  loading ? (
+                    <div className=" bg-transparent flex items-center justify-center gap-3">
+                      <p className="bg-transparent">Getting Started</p>
+                      <Image
+                        src={"/home/spinner.svg"}
+                        width={25}
+                        height={25}
+                        alt="spinner"
+                        className=" bg-transparent animate-spin"
+                      />
+                    </div>
+                  ) : (
+                    "Get Started"
+                  )
+                }
+              />
             </div>
           </Form>
         </div>

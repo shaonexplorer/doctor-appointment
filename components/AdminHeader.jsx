@@ -6,7 +6,7 @@ function AdminHeader() {
     <div className="w-full h-[80px] rounded-[12px] bg-[#100623] flex items-center justify-between px-5">
       <Link href={"/"} className="bg-transparent">
         <Image
-          src="/home/logo.svg"
+          src={"/home/logo.svg"}
           width={160}
           height={32}
           alt="logo"

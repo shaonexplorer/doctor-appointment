@@ -12,9 +12,10 @@ import { Doctors, IdentificationTypes } from "@/constants";
 import CustomUpload from "./CustomUpload";
 import { createPatient } from "@/lib/actions/createPatient";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function RegisterForm({ searchParams }) {
+  const [loading, setLoading] = useState(false);
   const { control, getValues, formState, handleSubmit, register } = useForm();
 
   useEffect(() => {
@@ -38,13 +39,16 @@ function RegisterForm({ searchParams }) {
     const userId = params.userId;
 
     try {
+      setLoading(true);
       const response = await createPatient(data, userId);
+      setLoading(false);
       if (response)
         router.push(
           `/patients/${userId}/new-appointment?patientId=${response._id}`
         );
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   }
   return (
@@ -382,7 +386,20 @@ function RegisterForm({ searchParams }) {
         type="submit"
         className="text-white mt-10 font-semibold text-[16px] h-[48px] bg-[#24AE7C] rounded-[8px] w-full py-[8px] mb-[90px]"
       >
-        submit and continue
+        {loading ? (
+          <div className=" bg-transparent flex items-center justify-center gap-3">
+            <p className="bg-transparent">Submitting</p>
+            <Image
+              src={"/home/spinner.svg"}
+              width={25}
+              height={25}
+              alt="spinner"
+              className=" bg-transparent animate-spin"
+            />
+          </div>
+        ) : (
+          "Submit and Continue"
+        )}
       </button>
     </Form>
   );
