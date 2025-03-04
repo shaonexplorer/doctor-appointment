@@ -13,6 +13,7 @@ import CustomUpload from "./CustomUpload";
 import { createPatient } from "@/lib/actions/createPatient";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 function RegisterForm({ searchParams }) {
   const [loading, setLoading] = useState(false);
