@@ -5,8 +5,10 @@ import { Doctors } from "@/constants";
 import CustomTextArea from "./CustomTextArea";
 import CustomDateInput from "./CustomDateInput";
 import { useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 function ModalSchedule({ setShowModal, handleSchedule }) {
+  const [isLoading, setIsLoading] = useState(false);
   const searchParams = useSearchParams();
   const appId = searchParams.get("id");
 
@@ -79,14 +81,35 @@ function ModalSchedule({ setShowModal, handleSchedule }) {
           </Form>
         </section>
         <button
-          onClick={() => {
-            handleSchedule(appId);
+          onClick={async () => {
+            try {
+              setIsLoading(true);
+              await handleSchedule(appId);
 
-            setShowModal((prev) => ({ ...prev, schedule: false }));
+              setIsLoading(false);
+
+              setShowModal((prev) => ({ ...prev, schedule: false }));
+            } catch (error) {
+              console.log(error);
+              setIsLoading(false);
+            }
           }}
           className="w-full h-[48px] bg-[#24AE7C] rounded-[8px] text-white font-semibold"
         >
-          Schedule Appointment
+          {isLoading ? (
+            <div className=" bg-transparent flex items-center justify-center gap-3">
+              <p className="bg-transparent">Scheduling</p>
+              <Image
+                src={"/home/spinner.svg"}
+                width={25}
+                height={25}
+                alt="spinner"
+                className=" bg-transparent animate-spin"
+              />
+            </div>
+          ) : (
+            "Schedule Appointment"
+          )}
         </button>
       </div>
     </div>

@@ -2,8 +2,10 @@ import Image from "next/image";
 import { Controller, Form, useForm } from "react-hook-form";
 import CustomTextArea from "./CustomTextArea";
 import { useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 function ModalCancel({ setShowModal, handleCancel }) {
+  const [isLoading, setIsLoading] = useState(false);
   const { control } = useForm();
   const searchParams = useSearchParams();
   const appointmentId = searchParams.get("id");
@@ -48,13 +50,33 @@ function ModalCancel({ setShowModal, handleCancel }) {
           </Form>
         </section>
         <button
-          onClick={() => {
-            setShowModal((prev) => ({ ...prev, cancel: false }));
-            handleCancel(appointmentId);
+          onClick={async () => {
+            try {
+              setIsLoading(true);
+              await handleCancel(appointmentId);
+              setIsLoading(false);
+              setShowModal((prev) => ({ ...prev, cancel: false }));
+            } catch (error) {
+              console.log(error);
+              setIsLoading(false);
+            }
           }}
           className="w-full h-[48px] bg-[#F24E43] rounded-[8px] text-white font-semibold"
         >
-          Cancel Appointment
+          {isLoading ? (
+            <div className=" bg-transparent flex items-center justify-center gap-3">
+              <p className="bg-transparent">Cancelling</p>
+              <Image
+                src={"/home/spinner.svg"}
+                width={25}
+                height={25}
+                alt="spinner"
+                className=" bg-transparent animate-spin"
+              />
+            </div>
+          ) : (
+            "Cancel Appointment"
+          )}
         </button>
       </div>
     </div>

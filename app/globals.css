@@ -20,6 +20,10 @@
   font-weight: 500;
 }
 
+.PhoneInputCountry {
+  background-color: transparent;
+}
+
 .PhoneInputInput::placeholder {
   color: #1a1d21;
 }
