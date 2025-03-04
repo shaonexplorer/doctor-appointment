@@ -5,7 +5,13 @@ function AdminHeader() {
   return (
     <div className="w-full h-[80px] rounded-[12px] bg-[#100623] flex items-center justify-between px-5">
       <Link href={"/"} className="bg-transparent">
-        <img src="/home/logo.svg" className="w-[160px] bg-transparent"></img>
+        <Image
+          src="/home/logo.svg"
+          width={160}
+          height={32}
+          alt="logo"
+          className="w-[160px] bg-transparent"
+        />
       </Link>
       <div className="flex items-center gap-2 bg-transparent">
         <span className="w-[38px] h-[38px] overflow-hidden rounded-full flex justify-center items-center bg-white">

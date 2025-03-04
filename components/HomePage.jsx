@@ -11,6 +11,7 @@ import CustomPhoneInput from "./CustomPhoneInput";
 import handle from "@/lib/actions/user";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 function HomePage() {
   const router = useRouter();
@@ -58,7 +59,13 @@ function HomePage() {
   return (
     <div className="w-[1440px] h-screen mx-auto bg-[#131619] flex">
       <div className="w-[720px] px-[110px] py-[60px] flex flex-col justify-between">
-        <img src="/home/logo.svg" className="w-[160px]"></img>
+        <Image
+          src="/home/logo.svg"
+          width={160}
+          height={32}
+          alt="logo"
+          className="w-[160px]"
+        ></Image>
         <div className="flex flex-col">
           <h1 className="font-bold text-[36px] text-white">Welcome 👋</h1>
           <p className="font-medium text-[18px] text-[#ABB8C4] capitalize">
