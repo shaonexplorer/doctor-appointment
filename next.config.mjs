@@ -1,4 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = { serverExternalPackages: ["@acme/ui"] };
 
 export default nextConfig;

@@ -2,20 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+* {
+  background-color: #131619;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  .input-phone {
+    @apply w-[496px] h-[48px] rounded-[8px] px-5 text-white font-medium text-[16px] bg-[#1A1D21] border-[#363A3D] border-[1px] outline-none !important;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.PhoneInputInput {
+  outline: none;
+  margin-left: 4px;
+  background: #1a1d21;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.PhoneInputInput::placeholder {
+  color: #1a1d21;
+}
+
+td {
+  @apply bg-[#1C2023];
+}
+
+td div {
+  @apply py-4;
+}
+
+th {
+  @apply py-[16px] bg-[#291254] text-[#CDCECF];
+}
+
+tfoot tr td {
+  @apply bg-[#291254];
+}
+
+table {
+  @apply border border-[#1A1D21] shadow-stone-500 shadow-sm;
+}
+
+tbody td {
+  @apply border-b border-stone-700 border-opacity-50;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  background-image: url("/home/calender.png");
+  width: 35px;
+  height: 35px;
+}
+
+.animate-ping {
+  animation-duration: 2s;
 }
