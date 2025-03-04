@@ -7,7 +7,7 @@ function page() {
       <div className="flex-1">
         <div className="w-[860px] mx-auto my-[60px] flex flex-col gap-[43px]">
           <Image
-            src={"/home/Logo.svg"}
+            src={"/assets/icons/logo-full.svg"}
             width={160}
             height={32}
             alt="logo"

@@ -16,7 +16,12 @@ async function page({ searchParams }) {
   return (
     <div className="relative text-white flex flex-col items-center justify-center w-[1280px] mx-auto h-screen bg-primary gap-[10px]">
       <Link href={"/"} className="absolute top-[60px]">
-        <Image src={"/home/Logo.png"} width={160} height={32} alt="logo" />
+        <Image
+          src={"/assets/icons/logo-full.svg"}
+          width={160}
+          height={32}
+          alt="logo"
+        />
       </Link>
 
       <Image
