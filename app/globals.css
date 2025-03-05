@@ -32,7 +32,7 @@ td {
   @apply bg-[#1C2023];
 }
 
-td div {
+tbody td div {
   @apply py-4;
 }
 
@@ -61,4 +61,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .animate-ping {
   animation-duration: 2s;
+}
+
+.myanimation {
+  animation: mymove 2s infinite;
+}
+
+@keyframes mymove {
+  from {
+    translate: -200px;
+  }
+  to {
+    translate: 1400px;
+  }
 }
